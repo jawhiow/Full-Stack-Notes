@@ -896,17 +896,17 @@ public class SmartPhone implements Cloneable {
 此时代理对象和目标对象需要实现相同的接口：
 
 ```java
-public interface IService {
-    void compute();
+public interface Subject {
+    void operation();
 }
 ```
 
 目标对象：
 
 ```java
-public class ComputeService implements IService {
+public class RealSubject implements Subject {
     @Override
-    public void compute() {
+    public void operation() {
         System.out.println("业务处理");
     }
 }
@@ -915,16 +915,16 @@ public class ComputeService implements IService {
 在代理对象中注入目标对象的实例：
 
 ```java
-public class ProxyService implements IService {
+public class Proxy implements Subject {
 
-    private IService target;
+    private Subject target;
 
-    public ProxyService(IService target) {
+    public Proxy(Subject target) {
         this.target = target;
     }
 
     @Override
-    public void compute() {
+    public void operation() {
         System.out.println("权限校验");
         target.compute();
         System.out.println("资源回收");
@@ -935,8 +935,8 @@ public class ProxyService implements IService {
 调用时候应该访问代理对象，而不是目标对象：
 
 ```java
-ProxyService proxyService = new ProxyService(new ComputeService());
-proxyService.compute();
+Proxy proxy = new Proxy(new RealSubject());
+proxy.compute();
 ```
 
 ### 1.3 JDK 代理
