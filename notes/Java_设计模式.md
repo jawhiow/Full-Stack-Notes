@@ -110,7 +110,8 @@ public class HungrySingleton implements Serializable {
 public class StaticInnerClassHungrySingleton {
 
     private static class InnerClass {
-        private static StaticInnerClassHungrySingleton instance = new StaticInnerClassHungrySingleton();
+        private static StaticInnerClassHungrySingleton instance =
+                                             new StaticInnerClassHungrySingleton();
     }
 
     // 确保构造器私有
